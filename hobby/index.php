@@ -59,7 +59,18 @@ else if($action == "addPostEntry"){
     $title = $_POST['postTitle'];
     $description = $_POST['postDesc'];
     $link = $_POST['postLink'];
-    addPostForHobby($hobbyId,$title,$description,$link);
+
+
+    //$postImage = $_POST['postImage'];
+    
+    $filename = $_FILES['postImage']['name'];
+    $tempname = $_FILES['postImage']['tmp_name'];
+    $folder = "../image/".$filename;
+
+    move_uploaded_file($tempname,$folder);
+
+    addPostForHobby($hobbyId,$title,$description,$link,$filename);
+
     $hobby = getHobbyById($hobbyId);
     $postsForHobby = getAllPostsForHobby($hobbyId);
     include('posts.php');

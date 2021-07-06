@@ -34,11 +34,13 @@
     <tr>
         <th>Post Title</th>
         <th>Post Description</th>
+        <th>Image</th>
     </tr>
     <?php foreach ($postsForHobby as $post) : ?>
     <tr>
         <td><?php echo $post['Title'];?></td>
         <td><?php echo $post['Description'];?></td>
+        <td><img src="../image/<?php echo $post['Image'] ?>" alt="" width="180" height="100"></td>
         <td>
                 <form action="index.php" method="post">
                     <input type="hidden" name="action"

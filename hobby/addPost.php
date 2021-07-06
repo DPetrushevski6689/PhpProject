@@ -6,7 +6,7 @@
     </div>
     
     <div>
-        <form action="index.php" method="post">
+        <form action="index.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="addPostEntry">
         <input type="hidden" name="hobbyId" value="<?php echo $hobby['Id'] ?>">
             <div>
@@ -22,6 +22,11 @@
             <div>
                 <label>Link:</label>
                 <input type="input" name="postLink">
+            </div>
+            <br>
+            <div>
+                <label>Image:</label>
+                <input type="file" name="postImage">
             </div>
             <br>
             <input type="submit" value="Add">

@@ -15,13 +15,17 @@
         return $hobby;
     }
 
-    function addPostForHobby($hobbyId,$title,$desc,$link){
+    function addPostForHobby($hobbyId,$title,$desc,$link,$fileName){
+
         global $db;
         $query = "INSERT INTO posts
-        (Title, Description, Link, hobbieId)
+        (Title, Description, Image, Link, hobbieId)
      VALUES
-        ('$title', '$desc', '$link', '$hobbyId')";
+        ('$title', '$desc', '$fileName','$link', '$hobbyId')";
         $db->exec($query);
+
+        
+
     }
 
     function getPostById($postId){
@@ -47,10 +51,11 @@
         $user = $db->query($userQuery);
         $user = $user->fetch();
         $userId = $user['Id'];
+        $date = date("Y/m/d");
         $query = "INSERT INTO comments
-        (Description, Link, userId, postId)
+        (Description, Link, Date, userId, postId)
         VALUES
-        ('$commentDesc', '$commentLink', '$userId', '$postId')";
+        ('$commentDesc', '$commentLink', '$date' ,'$userId', '$postId')";
         $db->exec($query);
 
     }
