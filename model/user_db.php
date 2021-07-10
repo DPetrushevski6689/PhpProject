@@ -42,6 +42,7 @@
 
         setcookie('userFirstName', $user['FirstName'], $cookieExpire, $cookiePath);
         setcookie('isAdmin', $user['isAdmin'], $cookieExpire, $cookiePath);
+        setcookie('userId',$user['Id'], $cookieExpire, $cookiePath);
 
         //Set a session for the user on login
         session_start();
@@ -76,6 +77,7 @@
         $user = $user->fetch();
         setcookie('userFirstName',$user['FirstName'] ,$cookieExpire, $cookiePath);
         setcookie('isAdmin', $user['isAdmin'], $cookieExpire, $cookiePath);
+        setcookie('userId',$user['Id'], $cookieExpire, $cookiePath);
 
         session_start();
         if(isset($_SESSION['email'])){

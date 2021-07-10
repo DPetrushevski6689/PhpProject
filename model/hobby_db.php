@@ -29,10 +29,11 @@
 
     function addHobbyUser($type,$name){
         global $db;
+        $userId = filter_input(INPUT_COOKIE,'userId',FILTER_VALIDATE_INT);
         $query = "INSERT INTO hobbies
-        (Type, Name, Approved)
+        (Type, Name, Approved, userId)
      VALUES
-        ('$type', '$name', '0')";
+        ('$type', '$name', '0', '$userId')";
         $db->exec($query);
         include('../hobby/hobbyAddSuccessUser.php');
         exit();

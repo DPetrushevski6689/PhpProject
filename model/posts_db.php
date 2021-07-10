@@ -1,4 +1,13 @@
 <?php 
+
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\Exception;
+
+    //Load Composer's autoloader
+    require '../vendor/autoload.php';
+
     function getAllPostsForHobby($hobbyId){
         global $db;
         $hobbyQuery = "SELECT * FROM posts
@@ -23,10 +32,51 @@
      VALUES
         ('$title', '$desc', '$fileName','$link', '$hobbyId')";
         $db->exec($query);
+        $hobby = getHobbyById($hobbyId);
+        $userId = $hobby['userId'];
+        $userQuery = "SELECT * FROM users
+        WHERE users.Id = '$userId'";
+        $user = $db->query($userQuery);
+        $user = $user->fetch();
 
+        //send mail to user
         
 
+        //Create an instance; passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $mail->isSMTP();                                            //Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+            $mail->Username   = 'webappfeit@gmail.com';                     //SMTP username
+            $mail->Password   = 'webAppTest44$';                               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+            $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+            //Recipients
+            $mail->setFrom('webappfeit@gmail.com');
+            $mail->addAddress($user['Email']);               //Name is optional
+            
+
+            
+
+            //Content
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Hobby Space Post';
+            $mail->Body    = '<b>A post has been added for your hobby</b>';
+            $mail->AltBody = 'A post has been added for your hobby';
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+
+       
     }
+}
 
     function getPostById($postId){
         global $db;
