@@ -47,17 +47,17 @@
 
         try {
             //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+            $mail->SMTPDebug = 1;                      //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->Host       = 'smtp-mail.outlook.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'webappfeit@gmail.com';                     //SMTP username
-            $mail->Password   = 'webAppTest44$';                               //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+            $mail->Username   = 'phpprojectewq@outlook.com';                     //SMTP username
+            $mail->Password   = 'Phpproject!@#ewq.';                               //SMTP password
+            $mail->SMTPSecure = 'tls';            //Enable implicit TLS encryption
             $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('webappfeit@gmail.com');
+            $mail->setFrom('phpprojectewq@outlook.com','Hobbie Space');
             $mail->addAddress($user['Email']);               //Name is optional
             
 
